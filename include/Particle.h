@@ -1,9 +1,7 @@
 #pragma once
 #include "vec2.h"
 
-vec2 earth_gravity = vec2(0, -9.81f);
-
-class RigidBody
+class Particle
 {
 public:
 	vec2 Position;
