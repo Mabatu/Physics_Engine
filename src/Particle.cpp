@@ -11,19 +11,27 @@ void Particle::Update(float dt) {
 	else {
 		Force.y = Force.y;
 	}	
-	Velocity = Velocity + Force / Mass * dt;
-	Position = Position + Velocity * dt;
+	Acceleration = Force / Mass;
+	Position = Position + Velocity * dt + Acceleration * (dt * dt) / 2;
+	Velocity = Velocity + Acceleration * dt;
 	
 }
 void Particle::ApplyForce(vec2 ExternalForce, float dt) {
 	Force = (earth_gravity * Mass) + ExternalForce;
-	if (Force.y <= 0.0f) {
+/*  
+   if (Force.y <= 0.0f) {
 		Force.y = 0.0f;
 	}
 	else {
 		Force.y = Force.y;
 	}
-	Velocity = Velocity + Force / Mass * dt;
-	Position = Position + Velocity * dt;
+*/
+	Acceleration = Force / Mass;
+	Position = Position + Velocity * dt + Acceleration * (dt * dt) / 2;
+	Velocity = Velocity + Acceleration * dt;	
 }
-
+void Particle::ApplyImpulse(vec2 ImpulsiveForce, float dt) {
+	//Impulse can be defined as change in momentum: F * dt = mv - mu 
+	Velocity = ((ImpulsiveForce * dt) + Velocity) / Mass;
+	Position = Position + Velocity * dt + Acceleration * (dt * dt) / 2;
+}
