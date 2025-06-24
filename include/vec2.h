@@ -15,6 +15,10 @@ struct vec2 {
     vec2 operator/(float scalar) const {
         return vec2(x / scalar, y / scalar);
     }
-float Magnitude() const;
-float Direction() const;
+    float Magnitude() const;
+    float Direction() const;
+    void Print() const;
 };
+
+
+
